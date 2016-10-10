@@ -1,6 +1,9 @@
 package appkomthach.chitakung.iotfarmer;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +17,8 @@ public class SignUPActivity extends AppCompatActivity {
     //Explicit
     private EditText nameEditText, userEditText, passwordEditText;
     private ImageView imageView;
-    private String nameString, userString, passwordString;
+    private String nameString, userString, passwordString,
+    pathImageString;
 
 
     @Override
@@ -52,10 +56,33 @@ public class SignUPActivity extends AppCompatActivity {
 
             Log.d("10octV1", "Choose Success");
 
+            // Find Path of Image Choose
+            Uri uri = data.getData();
+            pathImageString = myFindPath(uri);
+            Log.d("10octV1", "pathImgetring ==>" + pathImageString);
 
         }  //if
 
     } //onActivityResult
+
+    private String myFindPath(Uri uri) {
+
+        String result = null;
+        String[] strings = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, strings, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            result = cursor.getString(index);
+
+
+
+        } else {
+            result = uri.getPath();
+        }
+        return result;
+    }
 
     public void clickSingUPSing(View view) {
 
