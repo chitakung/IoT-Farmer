@@ -20,8 +20,8 @@ public class SignUPActivity extends AppCompatActivity {
     private EditText nameEditText, userEditText, passwordEditText;
     private ImageView imageView;
     private String nameString, userString, passwordString,
-    pathImageString, nameImageString;
-
+            pathImageString, nameImageString;
+    private boolean aBoolean = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class SignUPActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if ((requestCode == 0) && (resultCode == RESULT_OK)) {
+
+            aBoolean = false;
 
             Log.d("10octV1", "Choose Success");
 
@@ -116,6 +118,14 @@ public class SignUPActivity extends AppCompatActivity {
                     "มีช่องว่าง","กรุณากรอกข้อมูลทุกช่องด้วยครับ");
             myAlert.myDialog();
 
+
+        } else if (aBoolean) {
+            //Non Choose Image
+            MyAlert myAlert = new MyAlert(SignUPActivity.this, R.drawable.kon48,
+                    "ยังไม่ได้เลือกรูปครับ", "กรุณาเลือกรูปด้วยครับ");
+            myAlert.myDialog();
+        } else {
+            // Everything OK
 
         }
 
