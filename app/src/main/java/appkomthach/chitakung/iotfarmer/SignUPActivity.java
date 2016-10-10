@@ -2,6 +2,8 @@ package appkomthach.chitakung.iotfarmer;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +62,18 @@ public class SignUPActivity extends AppCompatActivity {
             Uri uri = data.getData();
             pathImageString = myFindPath(uri);
             Log.d("10octV1", "pathImgetring ==>" + pathImageString);
+
+            //setup Image Choose to ImageView
+            try {
+                Bitmap bitmap = BitmapFactory
+                        .decodeStream(getContentResolver()
+                        .openInputStream(uri));
+                imageView.setImageBitmap(bitmap);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }  //if
 
