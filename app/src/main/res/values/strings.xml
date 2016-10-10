@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IoT Farmer</string>
+
+    <string name="singup">Sign Up</string>
 </resources>
